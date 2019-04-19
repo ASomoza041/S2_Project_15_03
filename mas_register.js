@@ -7,8 +7,8 @@
 
    Filename: mas_register.js
 
-   Author:  
-   Date:    
+   Author: Alex Somoza 
+   Date: 4-18-19   
    
    Function List
    =============
@@ -27,4 +27,3 @@
 
 
 */
-
