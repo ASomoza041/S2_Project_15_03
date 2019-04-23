@@ -45,6 +45,46 @@ window.addEventListener("load", function () {
 function sessionTest() {
       var confSession = document.getElementById("sessionBox");
       if (confSession.selectedIndex === -1) {
-
+            confSession.setCustomValidity("Select a Session Package");
+      } else {
+            confSession.setCustomValidity("");
       }
+}
+
+function calcCart() {
+      var confName = document.getElementById("fnBox").value + " " + document.getElementById("lnBox").value;
+      var confGroup = document.getElementById("groupBox").value;
+      var confMail = document.getElementById("mailBox").value;
+      var confPhone = document.getElementById("phoneBox").value;
+      var confBanquet = document.getElementById("banquetBox").value;
+      var confBanquetCost = confBanquet * 55;
+      var selectedIndex = document.forms.regForm.elements.sessionBox.value;
+      if (sessionBox.selectedIndex != -1) {
+            var confSession = document.forms.regForm.elements.sessionBox[selectedIndex].textContent;
+            var confSessionCost = document.forms.regForm.elements.sessionBox.value;
+      } else {
+            confSession = "";
+            confSessionCost = 0;
+      }
+
+      if (document.forms.regForm.elements.mediaCB.checked) {
+            var confPack = "yes";
+            var confPackCost = 115;
+      } else {
+            confPack = "no";
+            confPackCost = 0;
+      }
+      var confTotal = parseFloat(confBanquetCost) + parseFloat(confSessionCost) + parseFloat(confPackCost);
+      writeSessionValues();
+}
+
+function writeSessionValues() {
+      document.getElementById("") = ;
+      document.getElementById("") = ;
+      document.getElementById("") = ;
+      document.getElementById("") = ;
+      document.getElementById("") = ;
+      document.getElementById("") = ;
+      document.getElementById("") = ;
+      document.getElementById("") = ;
 }
