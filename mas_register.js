@@ -27,7 +27,7 @@
 
 
 */
-
+//This event listner will run when the page loads and will run an anonymous function that will set up many event handlers that will help set up the cart and check any validators.
 window.addEventListener("load", function () {
       calcCart();
       document.getElementById("regSubmit").onclick = sessionTest;
@@ -41,50 +41,53 @@ window.addEventListener("load", function () {
       document.getElementById("sessionBox").onchange = calcCart;
       document.getElementById("mediaCB").onclick = calcCart;
 });
-
+//This will check if a package has been selected and if not it will not let the user submit the form and give them a notcifcation telling them to shoose a package.
 function sessionTest() {
-      var confSession = document.getElementById("sessionBox");
+      confSession = document.getElementById("sessionBox");
       if (confSession.selectedIndex === -1) {
             confSession.setCustomValidity("Select a Session Package");
       } else {
             confSession.setCustomValidity("");
       }
 }
-
+//This function will go through and assign values to the session storage based on the users choices and get them ready for display later. It will also calculate the total cost of the users selected items.
 function calcCart() {
-      var confName = document.getElementById("fnBox").value + " " + document.getElementById("lnBox").value;
-      var confGroup = document.getElementById("groupBox").value;
-      var confMail = document.getElementById("mailBox").value;
-      var confPhone = document.getElementById("phoneBox").value;
-      var confBanquet = document.getElementById("banquetBox").value;
-      var confBanquetCost = confBanquet * 55;
-      var selectedIndex = document.forms.regForm.elements.sessionBox.value;
-      if (sessionBox.selectedIndex != -1) {
-            var confSession = document.forms.regForm.elements.sessionBox[selectedIndex].textContent;
-            var confSessionCost = document.forms.regForm.elements.sessionBox.value;
+      sessionStorage.confName = document.forms.regForm.elements.fnBox.value + " " + document.forms.regForm.elements.lnBox.value;
+      sessionStorage.confGroup = document.forms.regForm.elements.groupBox.value;
+      sessionStorage.confMail = document.forms.regForm.elements.mailBox.value;
+      sessionStorage.confPhone = document.forms.regForm.elements.phoneBox.value;
+      sessionStorage.confBanquet = document.forms.regForm.elements.banquetBox.value;
+      sessionStorage.confBanquetCost = sessionStorage.confBanquet * 55;
+      var selectedIndex = document.getElementById("sessionBox").selectedIndex;
+
+
+      if (selectedIndex != -1) {
+            sessionStorage.confSession = document.forms.regForm.elements.sessionBox[selectedIndex].text;
+            sessionStorage.confSessionCost = document.forms.regForm.elements.sessionBox[selectedIndex].value;
       } else {
-            confSession = "";
-            confSessionCost = 0;
+            sessionStorage.confSession = "";
+            sessionStorage.confSessionCost = 0;
       }
 
       if (document.forms.regForm.elements.mediaCB.checked) {
-            var confPack = "yes";
-            var confPackCost = 115;
+            sessionStorage.confPack = "yes";
+            sessionStorage.confPackCost = 115;
       } else {
-            confPack = "no";
-            confPackCost = 0;
+            sessionStorage.confPack = "no";
+            sessionStorage.confPackCost = 0;
       }
-      var confTotal = parseFloat(confBanquetCost) + parseFloat(confSessionCost) + parseFloat(confPackCost);
+      sessionStorage.confTotal = parseFloat(sessionStorage.confBanquetCost) + parseFloat(sessionStorage.confSessionCost) + parseFloat(sessionStorage.confPackCost);
       writeSessionValues();
 }
-
+//This function will display the values in the session storage in the cart based on what the user chose.
 function writeSessionValues() {
-      document.getElementById("") = ;
-      document.getElementById("") = ;
-      document.getElementById("") = ;
-      document.getElementById("") = ;
-      document.getElementById("") = ;
-      document.getElementById("") = ;
-      document.getElementById("") = ;
-      document.getElementById("") = ;
+      document.getElementById("regName").textContent = sessionStorage.confName;
+      document.getElementById("regGroup").textContent = sessionStorage.confGroup;
+      document.getElementById("regEmail").textContent = sessionStorage.confMail;
+      document.getElementById("regPhone").textContent = sessionStorage.confPhone;
+      document.getElementById("regSession").textContent = sessionStorage.confSession;
+      document.getElementById("regBanquet").textContent = sessionStorage.confBanquet;
+      document.getElementById("regPack").textContent = sessionStorage.confPack;
+
+      document.getElementById("regTotal").textContent = "$" + sessionStorage.confTotal;
 }
